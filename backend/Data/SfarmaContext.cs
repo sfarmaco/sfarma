@@ -33,6 +33,7 @@ public class SfarmaContext : DbContext
             e.Property(p => p.Nombre).HasColumnName("nombre");
             e.Property(p => p.PrincipioActivo).HasColumnName("principio_activo");
             e.Property(p => p.Laboratorio).HasColumnName("laboratorio");
+            e.Property(p => p.ProveedorId).HasColumnName("proveedor_id");
             e.Property(p => p.PrecioCompra).HasColumnName("precio_compra");
             e.Property(p => p.PrecioVenta).HasColumnName("precio_venta");
             e.Property(p => p.StockActual).HasColumnName("stock_actual");
@@ -43,6 +44,7 @@ public class SfarmaContext : DbContext
             e.Property(p => p.PrecioCompra).HasColumnType("decimal(18,2)");
             e.Property(p => p.PrecioVenta).HasColumnType("decimal(18,2)");
             e.HasIndex(p => p.CodigoBarras).IsUnique();
+            e.HasOne(p => p.Proveedor).WithMany(r => r.Productos).HasForeignKey(p => p.ProveedorId).HasConstraintName("fk_producto_proveedor");
         });
 
         modelBuilder.Entity<Proveedor>(e =>

@@ -6,6 +6,8 @@ public class Producto
     public string Nombre { get; set; } = null!;
     public string PrincipioActivo { get; set; } = null!;
     public string Laboratorio { get; set; } = null!;
+    public int? ProveedorId { get; set; }
+    public Proveedor? Proveedor { get; set; }
     public decimal PrecioCompra { get; set; }
     public decimal PrecioVenta { get; set; }
     public int StockActual { get; set; }
