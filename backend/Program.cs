@@ -29,9 +29,13 @@ builder.Services.AddScoped<DataSeeder>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFront", policy =>
-        policy.WithOrigins("http://localhost:5173", "https://localhost:5173")
-              .AllowAnyHeader()
-              .AllowAnyMethod());
+        policy.WithOrigins(
+            "http://localhost:5173",
+            "https://localhost:5173",
+            "https://sfarma.netlify.app"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod());
 });
 
 // JWT
