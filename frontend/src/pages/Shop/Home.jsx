@@ -36,6 +36,9 @@ export default function Home() {
             <p className="text-lg text-blue-50">
               Conecta clientes al detalle y al por mayor, integra proveedores y dirige tu operación con dashboards, KPIs y control de calidad.
             </p>
+            <div className="inline-flex items-center px-4 py-2 bg-white/15 rounded-lg border border-white/20 text-sm font-semibold">
+              Slogan: Salud conectada, control total.
+            </div>
             <div className="flex flex-wrap gap-3">
               <Link
                 to="/catalogo"

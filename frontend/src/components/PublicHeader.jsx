@@ -14,7 +14,7 @@ export default function PublicHeader() {
           <img
             src="/logo.png"
             alt="Sfarma"
-            className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
+            className="h-16 sm:h-20 md:h-24 w-auto object-contain"
           />
         </Link>
         <button

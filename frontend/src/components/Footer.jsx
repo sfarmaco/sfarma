@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-4 gap-6">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <img src="/logo.png" alt="Sfarma" className="h-10 w-10 sm:h-12 sm:w-12 object-contain" />
+            <img src="/logo.png" alt="Sfarma" className="h-16 sm:h-20 md:h-24 w-auto object-contain" />
           </div>
           <p className="text-sm text-gray-300">
             Farmacia online + ERP para mayoristas y minoristas. Slogan: “Sfarma, tu farmacia en la nube”.
