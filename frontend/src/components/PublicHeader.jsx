@@ -10,9 +10,12 @@ export default function PublicHeader() {
   return (
     <header className="bg-white shadow sticky top-0 z-30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <img src="/logo.png" alt="Sfarma" className="h-8 w-8 object-contain" />
-          <span className="text-xl font-bold text-blue-700">Sfarma</span>
+        <Link to="/" className="flex items-center">
+          <img
+            src="/logo.png"
+            alt="Sfarma"
+            className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
+          />
         </Link>
         <button
           className="md:hidden px-3 py-2 text-sm border rounded"
