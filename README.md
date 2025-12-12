@@ -48,9 +48,10 @@ Actualiza credenciales de DB y la llave JWT antes de producción.
 - Proveedores: `api/proveedores`
 - Usuarios (Admin): `api/usuarios`
 - Ventas: `api/saleorders` (estados: Quote, Confirmed, Delivered, Invoiced, Paid, Cancelled) y `POST /api/saleorders/{id}/invoice` para generar factura cliente.
-- Compras: `api/purchaseorders` (estados: Draft, Sent, Received, Invoiced, Paid, Cancelled)
+- Compras: `api/purchaseorders` (estados: Draft, Sent, Received, Invoiced, Paid, Cancelled) y `POST /api/purchaseorders/{id}/invoice` para factura de proveedor.
 - Facturas: `api/invoices` (Customer/Vendor, estados: Draft, Open, Paid, Cancelled)
 - Inventario: ubicaciones y pickings `api/inventory/*` (pickings Incoming/Outgoing/Internal; estados Draft, Reserved, Done). Ajusta stock al completar.
+- Dashboard: `GET /api/dashboard` (KPI de ventas, inventario, compras).
 
 Flujo stock:
 - Venta Delivered descuenta stock.

@@ -115,3 +115,5 @@ C:\Users\GANNICUSCELTTIC\Desktop\clubkdrama\sfarma\backend\obj\Debug\net8.0\refi
 C:\Users\GANNICUSCELTTIC\Desktop\clubkdrama\sfarma\backend\obj\Debug\net8.0\Sfarma.Api.pdb
 C:\Users\GANNICUSCELTTIC\Desktop\clubkdrama\sfarma\backend\obj\Debug\net8.0\Sfarma.Api.genruntimeconfig.cache
 C:\Users\GANNICUSCELTTIC\Desktop\clubkdrama\sfarma\backend\obj\Debug\net8.0\ref\Sfarma.Api.dll
+C:\Users\GANNICUSCELTTIC\Desktop\clubkdrama\sfarma\backend\bin\Debug\net8.0\Sfarma.Api.staticwebassets.runtime.json
+C:\Users\GANNICUSCELTTIC\Desktop\clubkdrama\sfarma\backend\obj\Debug\net8.0\Sfarma.Api.sourcelink.json

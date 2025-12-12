@@ -1,9 +1,9 @@
 import PublicHeader from "../../components/PublicHeader";
 
 const promos = [
-  { title: "2x1 Analgésicos", detail: "Combina Paracetamol e Ibuprofeno", until: "Hoy" },
+  { title: "2x1 Analgésicos", detail: "Paracetamol + Ibuprofeno", until: "Hoy" },
   { title: "Vitaminas -20%", detail: "Vitamina C y complejos B", until: "Esta semana" },
-  { title: "Dermocosmética -15%", detail: "Productos dermatológicos seleccionados", until: "Fin de mes" },
+  { title: "Dermocosmética -15%", detail: "Líneas dermatológicas seleccionadas", until: "Fin de mes" },
 ];
 
 export default function Promos() {

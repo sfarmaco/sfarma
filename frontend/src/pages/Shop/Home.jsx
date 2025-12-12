@@ -2,24 +2,24 @@ import { Link } from "react-router-dom";
 import PublicHeader from "../../components/PublicHeader";
 
 const promoTiles = [
-  { title: "2x1 Analgésicos", desc: "Combina Paracetamol e Ibuprofeno", badge: "Hoy" },
-  { title: "Vitaminas -20%", desc: "Defensas y bienestar familiar", badge: "Semana Salud" },
-  { title: "Entrega express", desc: "Menos de 2h en zonas activas", badge: "Express" },
+  { title: "2x1 Analgésicos", desc: "Paracetamol + Ibuprofeno en pedidos web", badge: "Hoy" },
+  { title: "Vitaminas -20%", desc: "Defensas familiares y multivitamínicos", badge: "Semana Salud" },
+  { title: "Entrega express", desc: "Menos de 2h en zonas habilitadas", badge: "Express" },
 ];
 
 const erpHighlights = [
-  { title: "Dashboards en vivo", desc: "Ventas, márgenes, rotación, rupturas y alertas de caducidad." },
-  { title: "Calidad y trazabilidad", desc: "Lotes, vencimientos, control de temperatura y registros por proveedor." },
+  { title: "Dashboards en vivo", desc: "Ventas, márgenes, rotación y alertas de caducidad o rupturas." },
+  { title: "Calidad y trazabilidad", desc: "Lotes, vencimientos, control de temperatura y trazas por proveedor." },
   { title: "Compras y mayoreo", desc: "Negocia por volumen, controla costos y automatiza reorden mínimo." },
   { title: "POS y tienda online", desc: "Caja rápida en sala y canal web unificado con inventario en tiempo real." },
-  { title: "Perfiles y roles", desc: "Admin, vendedor, comprador, proveedor invitado; accesos separados." },
+  { title: "Perfiles y roles", desc: "Admin, Ventas, Compras, Inventario, Contabilidad y proveedores invitados." },
   { title: "KPIs críticos", desc: "GMROI, días de inventario, tickets promedio, devoluciones y mermas." },
 ];
 
 const segments = [
   { title: "Detalle", desc: "Carrito ágil, promos, entregas express y favoritos." },
   { title: "Mayoreo", desc: "Listas por volumen, acuerdos con proveedores y precios escalonados." },
-  { title: "Proveedores", desc: "Portal para subir catálogos, lotes, COA y negociar condiciones." },
+  { title: "Proveedores", desc: "Portal para catálogos, lotes, COA y negociación de condiciones." },
 ];
 
 export default function Home() {
@@ -31,7 +31,7 @@ export default function Home() {
           <div className="space-y-4 lg:w-2/3">
             <p className="uppercase text-sm tracking-wide">Farmacia · Tienda + ERP</p>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-              Sfarma: tu farmacia en la nube, vende y controla en un solo lugar
+              Sfarma: farmacia y ERP en la nube, vende y controla sin fricción
             </h1>
             <p className="text-lg text-blue-50">
               Conecta clientes al detalle y al por mayor, integra proveedores y dirige tu operación con dashboards, KPIs y control de calidad.
@@ -85,6 +85,7 @@ export default function Home() {
             <div>
               <p className="text-sm text-gray-500 uppercase">ERP para farmacia</p>
               <h2 className="text-2xl font-bold">Control total: dashboards, indicadores y calidad</h2>
+              <p className="text-sm text-gray-600 mt-1">Módulos: Ventas, Compras, Inventario, Facturación, POS y CRM.</p>
             </div>
             <Link
               to="/login"
@@ -100,6 +101,9 @@ export default function Home() {
                 <p className="text-sm text-gray-600">{f.desc}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-4 text-sm text-gray-600">
+            Roles listos: Admin, Ventas, Compras, Inventario, Contabilidad y Proveedores externos.
           </div>
         </section>
 

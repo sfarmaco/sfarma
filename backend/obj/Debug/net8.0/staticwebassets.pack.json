@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\GANNICUSCELTTIC\\Desktop\\clubkdrama\\sfarma\\backend\\wwwroot\\assets\\index-Bds2tg4Q.js",
+      "PackagePath": "staticwebassets\\assets\\index-Bds2tg4Q.js"
+    },
+    {
+      "Id": "C:\\Users\\GANNICUSCELTTIC\\Desktop\\clubkdrama\\sfarma\\backend\\wwwroot\\assets\\index-DFDCtB5q.css",
+      "PackagePath": "staticwebassets\\assets\\index-DFDCtB5q.css"
+    },
+    {
+      "Id": "C:\\Users\\GANNICUSCELTTIC\\Desktop\\clubkdrama\\sfarma\\backend\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\GANNICUSCELTTIC\\Desktop\\clubkdrama\\sfarma\\backend\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\GANNICUSCELTTIC\\Desktop\\clubkdrama\\sfarma\\backend\\wwwroot\\logo.png",
+      "PackagePath": "staticwebassets\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\GANNICUSCELTTIC\\Desktop\\clubkdrama\\sfarma\\backend\\wwwroot\\vite.svg",
+      "PackagePath": "staticwebassets\\vite.svg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Sfarma.Api.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Sfarma.Api.props",
+      "PackagePath": "build\\Sfarma.Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Sfarma.Api.props",
+      "PackagePath": "buildMultiTargeting\\Sfarma.Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Sfarma.Api.props",
+      "PackagePath": "buildTransitive\\Sfarma.Api.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

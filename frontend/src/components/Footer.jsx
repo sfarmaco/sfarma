@@ -16,7 +16,7 @@ export default function Footer() {
             <img src="/logo.png" alt="Sfarma" className="h-16 sm:h-20 md:h-24 w-auto object-contain" />
           </div>
           <p className="text-sm text-gray-300">
-            Farmacia online + ERP para mayoristas y minoristas. Slogan: “Sfarma, tu farmacia en la nube”.
+            Farmacia online + ERP para mayoristas y minoristas. Slogan: “Salud conectada, control total”.
           </p>
         </div>
         <div>
@@ -31,8 +31,8 @@ export default function Footer() {
           <h4 className="font-semibold mb-2">ERP</h4>
           <ul className="space-y-1 text-sm">
             <li>Dashboards y KPIs</li>
-            <li>Calidad y trazabilidad</li>
-            <li>Portal proveedores</li>
+            <li>Compras, ventas e inventario</li>
+            <li>Portal de proveedores</li>
           </ul>
         </div>
         <div>
@@ -46,6 +46,7 @@ export default function Footer() {
           </div>
           <p className="text-sm text-gray-300">WhatsApp: +51 999-888-777</p>
           <p className="text-sm text-gray-300">Correo: contacto@sfarma.com</p>
+          <p className="text-sm text-gray-300">Demos ERP: demos@sfarma.com</p>
         </div>
       </div>
     </footer>
