@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "wIEwI6Hdybrz9BBFoaf9EbcvGvfw8FSAIz9DH+U75D4=",
+  "Hash": "agc6MqbmrCIndAmVcIGLiXnogbE5s/7onDUyHD//gZo=",
   "Source": "Sfarma.Api",
   "BasePath": "_content/Sfarma.Api",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\GANNICUSCELTTIC\\Desktop\\clubkdrama\\sfarma\\backend\\wwwroot\\assets\\index-Bds2tg4Q.js",
+      "Identity": "C:\\Users\\GANNICUSCELTTIC\\Desktop\\clubkdrama\\sfarma\\backend\\wwwroot\\assets\\index-BTAgf5cv.js",
       "SourceId": "Sfarma.Api",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\GANNICUSCELTTIC\\Desktop\\clubkdrama\\sfarma\\backend\\wwwroot\\",
       "BasePath": "_content/Sfarma.Api",
-      "RelativePath": "assets/index-Bds2tg4Q.js",
+      "RelativePath": "assets/index-BTAgf5cv.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -33,15 +33,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\index-Bds2tg4Q.js"
+      "OriginalItemSpec": "wwwroot\\assets\\index-BTAgf5cv.js"
     },
     {
-      "Identity": "C:\\Users\\GANNICUSCELTTIC\\Desktop\\clubkdrama\\sfarma\\backend\\wwwroot\\assets\\index-DFDCtB5q.css",
+      "Identity": "C:\\Users\\GANNICUSCELTTIC\\Desktop\\clubkdrama\\sfarma\\backend\\wwwroot\\assets\\index-Yyo4iIDk.css",
       "SourceId": "Sfarma.Api",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\GANNICUSCELTTIC\\Desktop\\clubkdrama\\sfarma\\backend\\wwwroot\\",
       "BasePath": "_content/Sfarma.Api",
-      "RelativePath": "assets/index-DFDCtB5q.css",
+      "RelativePath": "assets/index-Yyo4iIDk.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -52,7 +52,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\index-DFDCtB5q.css"
+      "OriginalItemSpec": "wwwroot\\assets\\index-Yyo4iIDk.css"
     },
     {
       "Identity": "C:\\Users\\GANNICUSCELTTIC\\Desktop\\clubkdrama\\sfarma\\backend\\wwwroot\\favicon.ico",

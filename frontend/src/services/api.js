@@ -1,8 +1,12 @@
 import axios from "axios";
 
+const inferredBase =
+  import.meta.env.VITE_API_BASE_URL ||
+  (typeof window !== "undefined" ? `${window.location.origin}/api` : "http://localhost:5070/api");
+
 const api = axios.create({
-  // Usa la URL de la API desde variable de entorno (Netlify VITE_API_BASE_URL) o fallback local
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:5070/api",
+  // Prioriza variable de entorno; si no existe, usa mismo dominio del frontend o fallback local
+  baseURL: inferredBase,
 });
 
 api.interceptors.request.use((config) => {
