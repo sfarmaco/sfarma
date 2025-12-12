@@ -20,16 +20,129 @@ public class DataSeeder
         // Crea la base si no hay migraciones; util para bootstrap rapido
         await _context.Database.EnsureCreatedAsync();
 
+        // Crear tablas faltantes para compatibilidad en entornos donde EnsureCreated no agrega nuevas tablas
+        await _context.Database.ExecuteSqlRawAsync(@"
+            CREATE TABLE IF NOT EXISTS partners (
+                id SERIAL PRIMARY KEY,
+                nombre TEXT NOT NULL,
+                tipo TEXT,
+                email TEXT,
+                telefono TEXT,
+                direccion TEXT,
+                ciudad TEXT,
+                pais TEXT,
+                es_cliente BOOLEAN DEFAULT TRUE,
+                es_proveedor BOOLEAN DEFAULT FALSE
+            );
+            CREATE TABLE IF NOT EXISTS sale_orders (
+                id SERIAL PRIMARY KEY,
+                partner_id INT NOT NULL REFERENCES partners(id),
+                estado INT NOT NULL,
+                fecha TIMESTAMP NOT NULL,
+                fecha_entrega TIMESTAMP NULL,
+                moneda TEXT NOT NULL,
+                total NUMERIC(18,2) NOT NULL DEFAULT 0
+            );
+            CREATE TABLE IF NOT EXISTS sale_order_lines (
+                id SERIAL PRIMARY KEY,
+                sale_order_id INT NOT NULL REFERENCES sale_orders(id) ON DELETE CASCADE,
+                producto_id INT NOT NULL REFERENCES productos(id),
+                cantidad INT NOT NULL,
+                precio_unitario NUMERIC(18,2) NOT NULL,
+                impuestos NUMERIC(18,2) NOT NULL DEFAULT 0,
+                subtotal NUMERIC(18,2) NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS purchase_orders (
+                id SERIAL PRIMARY KEY,
+                proveedor_id INT NOT NULL REFERENCES proveedores(id),
+                estado INT NOT NULL,
+                fecha TIMESTAMP NOT NULL,
+                fecha_entrega TIMESTAMP NULL,
+                moneda TEXT NOT NULL,
+                total NUMERIC(18,2) NOT NULL DEFAULT 0
+            );
+            CREATE TABLE IF NOT EXISTS purchase_order_lines (
+                id SERIAL PRIMARY KEY,
+                purchase_order_id INT NOT NULL REFERENCES purchase_orders(id) ON DELETE CASCADE,
+                producto_id INT NOT NULL REFERENCES productos(id),
+                cantidad INT NOT NULL,
+                precio_unitario NUMERIC(18,2) NOT NULL,
+                impuestos NUMERIC(18,2) NOT NULL DEFAULT 0,
+                subtotal NUMERIC(18,2) NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS invoices (
+                id SERIAL PRIMARY KEY,
+                partner_id INT NOT NULL REFERENCES partners(id),
+                tipo INT NOT NULL,
+                estado INT NOT NULL,
+                fecha TIMESTAMP NOT NULL,
+                moneda TEXT NOT NULL,
+                total NUMERIC(18,2) NOT NULL DEFAULT 0
+            );
+            CREATE TABLE IF NOT EXISTS invoice_lines (
+                id SERIAL PRIMARY KEY,
+                invoice_id INT NOT NULL REFERENCES invoices(id) ON DELETE CASCADE,
+                producto_id INT NOT NULL REFERENCES productos(id),
+                cantidad INT NOT NULL,
+                precio_unitario NUMERIC(18,2) NOT NULL,
+                impuestos NUMERIC(18,2) NOT NULL DEFAULT 0,
+                subtotal NUMERIC(18,2) NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS locations (
+                id SERIAL PRIMARY KEY,
+                nombre TEXT NOT NULL,
+                tipo INT NOT NULL,
+                parent_id INT NULL
+            );
+            CREATE TABLE IF NOT EXISTS pickings (
+                id SERIAL PRIMARY KEY,
+                tipo INT NOT NULL,
+                estado INT NOT NULL,
+                origen_id INT NULL REFERENCES locations(id),
+                destino_id INT NULL REFERENCES locations(id)
+            );
+            CREATE TABLE IF NOT EXISTS moves (
+                id SERIAL PRIMARY KEY,
+                picking_id INT NOT NULL REFERENCES pickings(id) ON DELETE CASCADE,
+                producto_id INT NOT NULL REFERENCES productos(id),
+                cantidad NUMERIC(18,2) NOT NULL,
+                estado INT NOT NULL,
+                lote_id INT NULL
+            );
+            CREATE TABLE IF NOT EXISTS lots (
+                id SERIAL PRIMARY KEY,
+                producto_id INT NOT NULL REFERENCES productos(id),
+                lote_codigo TEXT NOT NULL,
+                fecha_vencimiento DATE NULL,
+                cantidad_disponible NUMERIC(18,2) NOT NULL DEFAULT 0
+            );
+        ");
+
         if (!await _context.Usuarios.AnyAsync())
         {
-            var admin = new Usuario
+            var usuarios = new List<Usuario>
             {
-                Nombre = "Admin",
-                Email = "admin@sfarma.com",
-                Rol = "Admin"
+                new() { Nombre = "Admin", Email = "admin@sfarma.com", Rol = "Admin", PasswordHash = string.Empty },
+                new() { Nombre = "Ventas", Email = "ventas@sfarma.com", Rol = "Sales", PasswordHash = string.Empty },
+                new() { Nombre = "Compras", Email = "compras@sfarma.com", Rol = "Purchase", PasswordHash = string.Empty },
+                new() { Nombre = "Inventario", Email = "inventario@sfarma.com", Rol = "Inventory", PasswordHash = string.Empty },
+                new() { Nombre = "Contabilidad", Email = "contabilidad@sfarma.com", Rol = "Accounting", PasswordHash = string.Empty }
             };
-            admin.PasswordHash = _hasher.HashPassword(admin, "Admin123!");
-            await _context.Usuarios.AddAsync(admin);
+
+            foreach (var u in usuarios)
+            {
+                var pwd = u.Rol switch
+                {
+                    "Sales" => "Sales123!",
+                    "Purchase" => "Purchase123!",
+                    "Inventory" => "Inventory123!",
+                    "Accounting" => "Accounting123!",
+                    _ => "Admin123!"
+                };
+                u.PasswordHash = _hasher.HashPassword(u, pwd);
+            }
+
+            await _context.Usuarios.AddRangeAsync(usuarios);
             await _context.SaveChangesAsync();
         }
 
@@ -59,6 +172,33 @@ public class DataSeeder
                 new() { Nombre = "Metformina 850mg", PrincipioActivo = "Metformina", Laboratorio = "Merck", PrecioCompra = 0.85m, PrecioVenta = 1.70m, StockActual = 160, StockMinimo = 16, FechaVencimiento = DateTime.UtcNow.AddYears(2), Lote = "L-008", CodigoBarras = "750100000008" }
             };
             await _context.Productos.AddRangeAsync(productos);
+            await _context.SaveChangesAsync();
+        }
+
+        if (!await _context.Partners.AnyAsync())
+        {
+            var partner = new Partner
+            {
+                Nombre = "Cliente Demo",
+                Tipo = "persona",
+                Email = "cliente@sfarma.com",
+                Telefono = "999-999",
+                EsCliente = true,
+                EsProveedor = false,
+                Ciudad = "Lima",
+                Pais = "PE"
+            };
+            await _context.Partners.AddAsync(partner);
+            await _context.SaveChangesAsync();
+        }
+
+        // Ubicaciones base
+        if (!await _context.Locations.AnyAsync())
+        {
+            var stock = new Location { Nombre = "WH/Stock", Tipo = LocationType.Internal };
+            var customer = new Location { Nombre = "Customer", Tipo = LocationType.Customer };
+            var supplier = new Location { Nombre = "Supplier", Tipo = LocationType.Supplier };
+            await _context.Locations.AddRangeAsync(stock, customer, supplier);
             await _context.SaveChangesAsync();
         }
     }

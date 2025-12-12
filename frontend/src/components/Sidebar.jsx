@@ -8,8 +8,23 @@ export default function Sidebar() {
       <NavLink to="/admin" className={linkClass}>
         Dashboard
       </NavLink>
+      <NavLink to="/admin/partners" className={linkClass}>
+        Contactos
+      </NavLink>
+      <NavLink to="/admin/ventas" className={linkClass}>
+        Ventas
+      </NavLink>
       <NavLink to="/admin/productos" className={linkClass}>
         Productos
+      </NavLink>
+      <NavLink to="/admin/compras" className={linkClass}>
+        Compras
+      </NavLink>
+      <NavLink to="/admin/inventario" className={linkClass}>
+        Inventario
+      </NavLink>
+      <NavLink to="/admin/facturas" className={linkClass}>
+        Facturas
       </NavLink>
       <NavLink to="/admin/proveedores" className={linkClass}>
         Proveedores

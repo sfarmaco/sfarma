@@ -7,7 +7,7 @@ namespace Sfarma.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
+[Authorize(Roles = "Admin,Purchase")]
 public class ProveedoresController : ControllerBase
 {
     private readonly IProveedorService _service;

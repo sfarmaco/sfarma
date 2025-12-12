@@ -1,8 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Partners from "./pages/Partners";
 import Productos from "./pages/Productos";
 import Proveedores from "./pages/Proveedores";
+import Ventas from "./pages/Ventas";
+import Compras from "./pages/Compras";
+import Inventario from "./pages/Inventario";
+import Facturas from "./pages/Facturas";
 import Pos from "./pages/Pos";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Shop/Home";
@@ -33,6 +38,22 @@ export default function AppRoutes() {
           }
         />
         <Route
+          path="/admin/partners"
+          element={
+            <ProtectedRoute>
+              <Partners />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/ventas"
+          element={
+            <ProtectedRoute>
+              <Ventas />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/admin/productos"
           element={
             <ProtectedRoute>
@@ -41,10 +62,34 @@ export default function AppRoutes() {
           }
         />
         <Route
+          path="/admin/compras"
+          element={
+            <ProtectedRoute>
+              <Compras />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/inventario"
+          element={
+            <ProtectedRoute>
+              <Inventario />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/admin/proveedores"
           element={
             <ProtectedRoute>
               <Proveedores />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/facturas"
+          element={
+            <ProtectedRoute>
+              <Facturas />
             </ProtectedRoute>
           }
         />

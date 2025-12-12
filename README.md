@@ -11,12 +11,12 @@ frontend/       # Vite + React + Tailwind, pantallas base y servicios
 ```
 
 ## Backend (.NET 8)
-1) Crear y restaurar (ya generado):
+1) Preparar:
 ```bash
 cd backend
 dotnet restore
 ```
-2) Migraciones y BD PostgreSQL:
+2) Migraciones locales (si usas EF Migrations):
 ```bash
 dotnet ef migrations add InitialCreate
 dotnet ef database update
@@ -41,12 +41,29 @@ Swagger: https://localhost:5001/swagger (ajusta puerto si difiere).
 ```
 Actualiza credenciales de DB y la llave JWT antes de producción.
 
-### Endpoints CRUD y Auth
-- `api/auth/login`, `api/auth/register`
-- `api/productos` (GET/GET{id}/POST/PUT/DELETE)
-- `api/proveedores` (GET/GET{id}/POST/PUT/DELETE)
-- `api/usuarios` (GET/GET{id}/POST/DELETE) — requiere rol Admin
-- `api/ventas` (GET/GET{id}/POST)
+### Módulos y endpoints actuales
+- Auth: `api/auth/login`, `api/auth/register`
+- Contactos: `api/partners`
+- Productos: `api/productos`
+- Proveedores: `api/proveedores`
+- Usuarios (Admin): `api/usuarios`
+- Ventas: `api/saleorders` (estados: Quote, Confirmed, Delivered, Invoiced, Paid, Cancelled) y `POST /api/saleorders/{id}/invoice` para generar factura cliente.
+- Compras: `api/purchaseorders` (estados: Draft, Sent, Received, Invoiced, Paid, Cancelled)
+- Facturas: `api/invoices` (Customer/Vendor, estados: Draft, Open, Paid, Cancelled)
+- Inventario: ubicaciones y pickings `api/inventory/*` (pickings Incoming/Outgoing/Internal; estados Draft, Reserved, Done). Ajusta stock al completar.
+
+Flujo stock:
+- Venta Delivered descuenta stock.
+- Compra Received suma stock.
+- Picking Done ajusta stock según tipo.
+- Factura desde OV: `/api/saleorders/{id}/invoice`.
+
+Roles sugeridos por endpoint:
+- Admin: acceso total.
+- Sales: saleorders, partners, productos.
+- Purchase: purchaseorders, proveedores, productos.
+- Inventory: inventory (locations/pickings).
+- Accounting: invoices.
 
 ## Frontend (Vite + React)
 1) Instalar:
@@ -54,27 +71,39 @@ Actualiza credenciales de DB y la llave JWT antes de producción.
 cd frontend
 npm install
 ```
-2) Correr en desarrollo:
+2) Dev:
 ```bash
-npm run dev
+npm run dev   # http://localhost:5173
 ```
-Servirá en http://localhost:5173.
+3) Build:
+```bash
+npm run build
+```
 
 ### Ajustes
-- API base en `frontend/src/services/api.js` (`baseURL`).
-- Estilos Tailwind en `src/index.css` y `tailwind.config.js`.
+- API base: `frontend/src/services/api.js` usa `VITE_API_BASE_URL` (o `http://localhost:5070/api` como fallback).
+- Estilos: `src/index.css`, `tailwind.config.js`.
 - AuthContext guarda token/usuario en localStorage.
 
-### Scripts útiles
-- `npm run dev` — entorno dev
-- `npm run build` — build producción
-- `npm run preview` — previsualizar build
-
-## Ejecutar ambos proyectos
-- Terminal 1: `cd backend && dotnet run`
-- Terminal 2: `cd frontend && npm run dev`
-Apunta `baseURL` del frontend al puerto real de la API.
+## Ejecutar ambos
+- Backend: `cd backend && dotnet run`
+- Frontend: `cd frontend && npm run dev`
 
 ## Despliegue
-- Backend: `dotnet publish -c Release` y desplegar con PostgreSQL configurado.
-- Frontend: `npm run build` y servir `frontend/dist` (Nginx/Apache/servicio estático). Actualiza CORS en la API si cambias dominios.
+- Backend: `dotnet publish -c Release` y desplegar con PostgreSQL. En Railway: root `/backend`, build `dotnet restore && dotnet publish -c Release -o out`, start `./out/Sfarma.Api`, env `ASPNETCORE_URLS=http://0.0.0.0:${PORT}`.
+- Frontend: `npm run build` y servir `frontend/dist`. Si lo integras en el backend, copia `frontend/dist/*` a `backend/wwwroot` y redeploy.
+
+## CORS (backend Program.cs)
+- Permitidos: `http://localhost:5173`, `https://localhost:5173`, `https://sfarma-production.up.railway.app`
+
+## Próximos pasos sugeridos
+- Usuarios de prueba (roles):
+  - Admin: `admin@sfarma.com` / `Admin123!`
+  - Ventas: `ventas@sfarma.com` / `Sales123!`
+  - Compras: `compras@sfarma.com` / `Purchase123!`
+  - Inventario: `inventario@sfarma.com` / `Inventory123!`
+  - Contabilidad: `contabilidad@sfarma.com` / `Accounting123!`
+- Roles/permisos finos por módulo.
+- Lotes/series y alertas de vencimiento.
+- Dashboards y reportes PDF.
+- POS/CRM/Proyectos/Encuestas/Firma/HR.

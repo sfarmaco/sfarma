@@ -7,7 +7,7 @@ namespace Sfarma.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
+[Authorize(Roles = "Admin,Sales")]
 public class VentasController : ControllerBase
 {
     private readonly IVentaService _service;
